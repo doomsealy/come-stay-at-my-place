@@ -1,0 +1,11 @@
+# Exclude large directories from Vercel deployment
+node_modules/
+videos/
+*.mov
+*.mp4
+
+# Development files
+.DS_Store
+.env.local
+.env*.local
+
