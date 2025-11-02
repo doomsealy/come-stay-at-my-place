@@ -41,3 +41,9 @@ Thumbs.db
 *.tmp
 *.temp
 
+# Large video files (use Git LFS if needed)
+videos/*.mov
+videos/*.mp4
+*.mov
+*.mp4
+
