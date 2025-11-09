@@ -485,7 +485,7 @@ class LoadingAnimations {
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize all components
     new HeroVideo(); // This will handle both video and slideshow
-    new ReviewsCarousel();
+    window.reviewsCarouselInstance = new ReviewsCarousel();
     new MobileNavigation();
     new NavbarScrollEffect();
     new SmoothScrolling();

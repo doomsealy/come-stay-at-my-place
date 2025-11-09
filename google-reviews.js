@@ -173,9 +173,14 @@ class GoogleReviews {
     }
 
     initCarousel() {
+        // Stop any existing carousel
+        if (window.reviewsCarouselInstance) {
+            window.reviewsCarouselInstance.stopCarousel();
+        }
+        
         // Reinitialize the reviews carousel
         if (window.ReviewsCarousel) {
-            new window.ReviewsCarousel();
+            window.reviewsCarouselInstance = new window.ReviewsCarousel();
         }
     }
 }
