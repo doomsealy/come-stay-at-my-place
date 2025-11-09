@@ -47,7 +47,7 @@ class GoogleReviews {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    placeId: 'ChIJ...' // We'll find the correct place ID via the API
+                    placeId: 'SEARCH' // API will search for "DJ Bigg Slim Events St Lucia"
                 })
             });
 
