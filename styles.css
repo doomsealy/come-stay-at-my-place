@@ -1618,9 +1618,17 @@ body {
     background: #fafafa;
 }
 
-.reviews-slider {
-    max-width: 800px;
+.reviews-container {
+    max-width: 1000px;
     margin: 0 auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.reviews-slider {
+    flex: 1;
     position: relative;
 }
 
@@ -1680,6 +1688,60 @@ body {
     display: block;
     font-size: 0.9rem;
     color: #64748b;
+}
+
+/* Review Navigation Buttons */
+.review-nav {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #0298dd;
+    background: white;
+    color: #0298dd;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.review-nav:hover {
+    background: #0298dd;
+    color: white;
+    transform: scale(1.1);
+}
+
+.review-nav:active {
+    transform: scale(0.95);
+}
+
+/* Review Indicators (dots) */
+.review-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 2rem;
+}
+
+.review-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #cbd5e1;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.review-indicator.active {
+    background: #0298dd;
+    width: 32px;
+    border-radius: 6px;
+}
+
+.review-indicator:hover {
+    background: #64748b;
 }
 
 /* ===== CONTACT SECTION ===== */
@@ -2835,6 +2897,21 @@ body {
 
     .form-row {
         grid-template-columns: 1fr;
+    }
+    
+    .reviews-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .review-nav {
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+    
+    .review-card {
+        padding: 2rem;
     }
 
     .footer-content {

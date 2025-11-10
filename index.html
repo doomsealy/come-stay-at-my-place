@@ -205,8 +205,12 @@
                 <h2 class="section-title">What Our Clients Say</h2>
                 <p class="section-subtitle">Real experiences from real events</p>
             </div>
-            <div class="reviews-slider">
-                <div class="review-card active">
+            <div class="reviews-container">
+                <button class="review-nav review-prev" aria-label="Previous review">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="reviews-slider">
+                    <div class="review-card active">
                     <div class="review-stars">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -264,6 +268,11 @@
                     </div>
                 </div>
             </div>
+            <button class="review-nav review-next" aria-label="Next review">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            </div>
+            <div class="review-indicators"></div>
         </div>
     </section>
 
@@ -312,6 +321,6 @@
     </footer>
 
     <script src="script.js"></script>
-    <script src="google-reviews.js"></script>
+    <script src="static-reviews.js"></script>
 </body>
 </html> 

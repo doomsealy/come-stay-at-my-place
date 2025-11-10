@@ -149,21 +149,61 @@ class ReviewsCarousel {
         this.reviews = document.querySelectorAll('.review-card');
         this.currentReview = 0;
         this.reviewInterval = null;
+        this.prevBtn = document.querySelector('.review-prev');
+        this.nextBtn = document.querySelector('.review-next');
+        this.indicatorsContainer = document.querySelector('.review-indicators');
         this.init();
     }
 
     init() {
         if (this.reviews.length > 1) {
+            this.createIndicators();
+            this.addEventListeners();
             this.startCarousel();
         }
     }
 
+    createIndicators() {
+        // Create dot indicators for each review
+        this.reviews.forEach((review, index) => {
+            const indicator = document.createElement('div');
+            indicator.className = `review-indicator ${index === 0 ? 'active' : ''}`;
+            indicator.addEventListener('click', () => this.goToReview(index));
+            this.indicatorsContainer.appendChild(indicator);
+        });
+        this.indicators = document.querySelectorAll('.review-indicator');
+    }
+
+    addEventListeners() {
+        // Previous button
+        if (this.prevBtn) {
+            this.prevBtn.addEventListener('click', () => {
+                this.prevReview();
+                this.resetAutoplay();
+            });
+        }
+
+        // Next button
+        if (this.nextBtn) {
+            this.nextBtn.addEventListener('click', () => {
+                this.nextReview();
+                this.resetAutoplay();
+            });
+        }
+    }
+
     showReview(index) {
-        // Remove active class from all reviews
+        // Remove active class from all reviews and indicators
         this.reviews.forEach(review => review.classList.remove('active'));
+        if (this.indicators) {
+            this.indicators.forEach(indicator => indicator.classList.remove('active'));
+        }
         
-        // Add active class to current review
+        // Add active class to current review and indicator
         this.reviews[index].classList.add('active');
+        if (this.indicators && this.indicators[index]) {
+            this.indicators[index].classList.add('active');
+        }
     }
 
     nextReview() {
@@ -171,10 +211,28 @@ class ReviewsCarousel {
         this.showReview(this.currentReview);
     }
 
+    prevReview() {
+        this.currentReview = (this.currentReview - 1 + this.reviews.length) % this.reviews.length;
+        this.showReview(this.currentReview);
+    }
+
+    goToReview(index) {
+        this.currentReview = index;
+        this.showReview(this.currentReview);
+        this.resetAutoplay();
+    }
+
     startCarousel() {
         this.reviewInterval = setInterval(() => {
             this.nextReview();
-        }, 10000); // Change review every 10 seconds
+        }, 8000); // Change review every 8 seconds
+    }
+
+    resetAutoplay() {
+        // Stop current autoplay
+        this.stopCarousel();
+        // Restart autoplay after user interaction
+        this.startCarousel();
     }
 
     stopCarousel() {
