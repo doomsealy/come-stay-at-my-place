@@ -45,7 +45,50 @@ const staticReviews = [
     }
 ];
 
-// Export for use in index.html
+// Function to create review HTML
+function createReviewCard(review, isActive = false) {
+    const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+    
+    return `
+        <div class="review-card ${isActive ? 'active' : ''}">
+            <div class="review-stars">
+                ${stars.split('').map(star => `<i class="fas fa-star${star === '☆' ? '-o' : ''}"></i>`).join('')}
+            </div>
+            <p class="review-text">${review.text}</p>
+            <div class="review-author">
+                <img src="${review.profile_photo_url}" alt="${review.author_name}" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(review.author_name)}&background=0298dd&color=fff'">
+                <div class="author-info">
+                    <span class="author-name">${review.author_name}</span>
+                    <span class="author-event">Google Review • ${review.relative_time_description}</span>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Load reviews when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    const reviewsSlider = document.querySelector('.reviews-slider');
+    
+    if (reviewsSlider && staticReviews.length > 0) {
+        // Inject all reviews into the slider
+        reviewsSlider.innerHTML = staticReviews.map((review, index) => 
+            createReviewCard(review, index === 0)
+        ).join('');
+        
+        console.log(`✅ Loaded ${staticReviews.length} static Google reviews`);
+        
+        // Reinitialize the carousel after loading reviews
+        setTimeout(() => {
+            if (window.reviewsCarouselInstance) {
+                window.reviewsCarouselInstance.stopCarousel();
+            }
+            window.reviewsCarouselInstance = new window.ReviewsCarousel();
+        }, 100);
+    }
+});
+
+// Export for use elsewhere if needed
 if (typeof window !== 'undefined') {
     window.staticReviews = staticReviews;
 }
