@@ -1233,10 +1233,10 @@ body {
 
 .about-content {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1.5fr;
     gap: 4rem;
     align-items: center;
-    max-width: 900px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
