@@ -487,55 +487,7 @@ class LoadingAnimations {
             card.style.animationDelay = `${index * 0.2}s`;
         });
 
-        // Add staggered animation to stats
-        const stats = document.querySelectorAll('.stat');
-        stats.forEach((stat, index) => {
-            stat.style.animationDelay = `${index * 0.1}s`;
-        });
-
-        // Animate numbers counting up
-        this.animateNumbers();
-    }
-
-    animateNumbers() {
-        const numberElements = document.querySelectorAll('.stat-number');
-        
-        numberElements.forEach(element => {
-            const finalNumber = element.textContent.replace(/\D/g, ''); // Extract number
-            const suffix = element.textContent.replace(/\d/g, ''); // Extract suffix
-            
-            if (finalNumber) {
-                this.countUp(element, 0, parseInt(finalNumber), suffix, 2000);
-            }
-        });
-    }
-
-    countUp(element, start, end, suffix, duration) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    let startTime = null;
-                    
-                    const animation = (currentTime) => {
-                        if (startTime === null) startTime = currentTime;
-                        const timeElapsed = currentTime - startTime;
-                        const progress = Math.min(timeElapsed / duration, 1);
-                        
-                        const currentNumber = Math.floor(progress * (end - start) + start);
-                        element.textContent = currentNumber + suffix;
-                        
-                        if (progress < 1) {
-                            requestAnimationFrame(animation);
-                        }
-                    };
-                    
-                    requestAnimationFrame(animation);
-                    observer.unobserve(entry.target);
-                }
-            });
-        });
-        
-        observer.observe(element);
+        // Stats section loaded - no animation needed
     }
 }
 
