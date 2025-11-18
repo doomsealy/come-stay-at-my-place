@@ -66,8 +66,8 @@ function createReviewCard(review, isActive = false) {
     `;
 }
 
-// Load reviews when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
+// Function to initialize the reviews carousel
+function initializeReviewsCarousel() {
     const reviewsSlider = document.querySelector('.reviews-slider');
     
     if (reviewsSlider && staticReviews.length > 0) {
@@ -78,15 +78,34 @@ document.addEventListener('DOMContentLoaded', () => {
         
         console.log(`✅ Loaded ${staticReviews.length} static Google reviews`);
         
-        // Reinitialize the carousel after loading reviews
-        setTimeout(() => {
-            if (window.reviewsCarouselInstance) {
-                window.reviewsCarouselInstance.stopCarousel();
+        // Wait for ReviewsCarousel to be available
+        function tryInitCarousel(attempts = 0) {
+            if (window.ReviewsCarousel && typeof window.ReviewsCarousel === 'function') {
+                // Stop existing carousel if it exists
+                if (window.reviewsCarouselInstance) {
+                    window.reviewsCarouselInstance.stopCarousel();
+                }
+                
+                // Create new carousel instance
+                window.reviewsCarouselInstance = new window.ReviewsCarousel();
+                console.log('✅ Reviews carousel initialized successfully');
+            } else if (attempts < 20) {
+                // Retry after 50ms (max 20 attempts = 1 second total)
+                setTimeout(() => tryInitCarousel(attempts + 1), 50);
+            } else {
+                console.error('❌ ReviewsCarousel class not found after 1 second');
             }
-            window.reviewsCarouselInstance = new window.ReviewsCarousel();
-        }, 100);
+        }
+        
+        // Start trying to initialize
+        tryInitCarousel();
+    } else {
+        console.error('❌ Reviews slider not found or no reviews to load');
     }
-});
+}
+
+// Load reviews when DOM is ready
+document.addEventListener('DOMContentLoaded', initializeReviewsCarousel);
 
 // Export for use elsewhere if needed
 if (typeof window !== 'undefined') {

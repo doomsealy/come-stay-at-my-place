@@ -152,14 +152,27 @@ class ReviewsCarousel {
         this.prevBtn = document.querySelector('.review-prev');
         this.nextBtn = document.querySelector('.review-next');
         this.indicatorsContainer = document.querySelector('.review-indicators');
+        
+        console.log(`ReviewsCarousel: Found ${this.reviews.length} review cards`);
+        console.log(`ReviewsCarousel: Prev button ${this.prevBtn ? 'found' : 'NOT FOUND'}`);
+        console.log(`ReviewsCarousel: Next button ${this.nextBtn ? 'found' : 'NOT FOUND'}`);
+        
         this.init();
     }
 
     init() {
-        if (this.reviews.length > 1) {
-            this.createIndicators();
-            this.addEventListeners();
-            this.startCarousel();
+        if (this.reviews.length > 0) {
+            // Show first review
+            if (this.reviews.length === 1) {
+                this.reviews[0].classList.add('active');
+            } else {
+                this.createIndicators();
+                this.addEventListeners();
+                this.startCarousel();
+                console.log('✅ ReviewsCarousel: Initialized with navigation');
+            }
+        } else {
+            console.warn('⚠️ ReviewsCarousel: No review cards found to display');
         }
     }
 
@@ -241,6 +254,9 @@ class ReviewsCarousel {
         }
     }
 }
+
+// Expose ReviewsCarousel to window for use in other scripts
+window.ReviewsCarousel = ReviewsCarousel;
 
 // ===== MOBILE NAVIGATION =====
 class MobileNavigation {
@@ -495,7 +511,7 @@ class LoadingAnimations {
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize all components
     new HeroVideo(); // This will handle both video and slideshow
-    window.reviewsCarouselInstance = new ReviewsCarousel();
+    // DON'T initialize ReviewsCarousel here - let static-reviews.js do it after loading reviews
     new MobileNavigation();
     new NavbarScrollEffect();
     new SmoothScrolling();
@@ -511,6 +527,11 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn('Backend integration not available:', error);
     });
 
+    // Note: Reviews are loaded by static-reviews.js (loaded in HTML)
+    // If you want to use dynamic Google reviews instead, uncomment the code below
+    // and remove the static-reviews.js script tag from your HTML
+    
+    /*
     // Initialize Google Places API reviews (real Google reviews)
     import('./google-reviews.js').then(() => {
         console.log('Google Places API reviews loaded');
@@ -523,6 +544,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.warn('Manual reviews also not available:', fallbackError);
         });
     });
+    */
 
     // Add page loaded class for any additional animations
     setTimeout(() => {
