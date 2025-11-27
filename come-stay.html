@@ -165,11 +165,21 @@
     </a>
 
     <script src="script.js"></script>
-    <script src="firebase-config.js"></script>
     <script>
         // Initialize Firebase
-        initializeFirebase();
-        console.log('Firebase ready on Come Stay page');
+        const firebaseConfig = {
+            apiKey: "AIzaSyBMV8CJOnTOLhb-2llMHgoFJ41NZwY4ejc",
+            authDomain: "biggslimevents.firebaseapp.com",
+            projectId: "biggslimevents",
+            storageBucket: "biggslimevents.firebasestorage.app",
+            messagingSenderId: "931606084852",
+            appId: "1:931606084852:web:46280798cce1428bee72a1",
+            measurementId: "G-PD2ZXKQZGP"
+        };
+        
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        console.log('Firebase initialized successfully');
     </script>
 </body>
 </html>
