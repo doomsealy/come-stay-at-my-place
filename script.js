@@ -10,7 +10,10 @@ class HeroVideo {
         this.isFullscreenMode = false;
         this.cursorTimer = null;
         this.soundEnabled = false;
-        this.init();
+        // Only initialize if video exists (for backward compatibility)
+        if (this.video) {
+            this.init();
+        }
     }
 
     init() {

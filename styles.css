@@ -14,6 +14,63 @@ body {
     line-height: 1.6;
     color: #1a1a1a;
     overflow-x: hidden;
+    background-color: #2a2a2a;
+    min-height: 100vh;
+}
+
+/* Disturbia Mas page keeps its black background */
+body.disturbia-page,
+.disturbia-page {
+    background-color: #0a0a0a !important;
+}
+
+section {
+    background-color: #f5f5f0;
+    padding: 4rem 0;
+}
+
+section:nth-child(even) {
+    background-color: #2a2a2a;
+    color: #f5f5f0;
+}
+
+section:nth-child(even) h1,
+section:nth-child(even) h2,
+section:nth-child(even) h3,
+section:nth-child(even) h4,
+section:nth-child(even) h5,
+section:nth-child(even) h6,
+section:nth-child(even) p {
+    color: #f5f5f0;
+}
+
+section:nth-child(even) .section-title {
+    -webkit-text-fill-color: #f5f5f0;
+    background: none;
+    color: #f5f5f0;
+}
+
+section:nth-child(even) .section-subtitle {
+    color: rgba(245, 245, 240, 0.85);
+}
+
+/* Step cards maintain light background even on dark sections */
+section:nth-child(even) .step-card {
+    background: #f5f5f0;
+}
+
+section:nth-child(even) .step-card h3,
+section:nth-child(even) .step-card p {
+    color: #1a1a1a;
+}
+
+/* Contact forms maintain light background even on dark sections */
+section:nth-child(even) .contact-form {
+    background: #ffffff;
+}
+
+section:nth-child(even) .contact-form label {
+    color: #1a1a1a;
 }
 
 .container {
@@ -147,6 +204,8 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: space-between;
     align-items: center;
     padding: 0.75rem 2rem;
+    overflow: visible;
+    min-height: 80px;
 }
 
 /* Smaller navbar on Saint Lucia page */
@@ -164,13 +223,16 @@ body:has(.saint-lucia-hero) .navbar .nav-container {
     display: flex;
     align-items: center;
     gap: 1rem;
+    overflow: visible;
 }
 
 .stay-logo-nav {
-    height: 160px;
+    height: 150px;
     width: auto;
-    max-width: 350px;
+    max-width: 300px;
     object-fit: contain;
+    transform: scale(1.25);
+    transform-origin: left center;
 }
 
 .logo-icon {
@@ -187,13 +249,15 @@ body:has(.saint-lucia-hero) .navbar .nav-container {
 }
 
 .logo {
-    height: 120px;
+    height: 150px;
     width: auto;
-    max-width: 250px;
-    min-width: 150px;
+    max-width: 300px;
+    min-width: 180px;
     object-fit: contain;
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
+    transform: scale(1.25);
+    transform-origin: left center;
 }
 
 .nav-menu {
@@ -453,7 +517,7 @@ body {
 }
 
 .saint-lucia-hero .hero-overlay {
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 1;
 }
 
@@ -487,35 +551,43 @@ body {
 .saint-lucia-content {
     text-align: center;
     color: white;
-    max-width: 800px;
+    max-width: 1000px;
     z-index: 2;
     position: relative;
+    width: 90%;
+    margin: 0 auto;
 }
 
 
 .saint-lucia-title {
-    font-size: 3.5rem;
+    font-size: 5rem;
     font-weight: 700;
     color: white;
     margin-bottom: 0.5rem;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     margin-top: 2rem; /* Add extra margin to ensure it's below the navbar */
     line-height: 1.1;
+    letter-spacing: 0.02em;
+    text-align: center;
+    width: 100%;
 }
 
 .saint-lucia-subtitle {
-    font-size: 1.5rem;
+    font-size: 2rem;
     color: white;
     margin-bottom: 1.5rem;
     font-weight: 600;
     opacity: 0.95;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.01em;
+    text-align: center;
+    width: 100%;
 }
 
 .saint-lucia-description {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     color: white;
-    max-width: 600px;
+    max-width: 900px;
     margin: 0 auto;
     line-height: 1.6;
     opacity: 0.9;
@@ -671,54 +743,69 @@ body {
 }
 
 .wedding-hero .hero-overlay {
-    display: none;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
 }
 
 .wedding-hero .container {
-    margin-left: 0;
-    padding-left: 2rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .wedding-hero .wedding-content {
-    max-width: 800px;
-    z-index: 1;
+    max-width: 1000px;
+    z-index: 2;
     position: relative;
-    text-align: left;
-    margin-left: 0;
+    text-align: center;
+    margin: 0 auto;
     display: block;
-    background: rgba(0, 0, 0, 0.4);
+    background: transparent;
     padding: 2rem;
-    border-radius: 10px;
+    width: 90%;
 }
 
 .wedding-title {
-    font-size: 2.5rem;
+    font-size: 5rem;
     font-weight: 700;
-    margin-bottom: 0.5rem;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    line-height: 1.2;
+    margin-bottom: 1rem;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-align: center;
+    width: 100%;
+    color: white;
 }
 
 .wedding-subtitle {
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
     opacity: 0.95;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    line-height: 1.3;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    line-height: 1.4;
+    color: white;
+    font-weight: 400;
+    letter-spacing: 0.01em;
 }
 
 .wedding-description {
-    font-size: 1.1rem;
-    opacity: 0.9;
-    line-height: 1.6;
-    max-width: 600px;
+    font-size: 1.3rem;
+    opacity: 0.92;
+    line-height: 1.7;
+    max-width: 900px;
     margin: 0 auto;
+    text-align: center;
+    width: 100%;
+    color: white;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 /* Package Cards */
 .packages-section {
-    padding: 5rem 2rem;
-    background: #f8fafc;
+    padding: 6rem 2rem;
+    background: #f5f5f0;
 }
 
 .packages-grid {
@@ -830,58 +917,83 @@ body {
 }
 
 /* Why Choose Us Section */
+/* Why Choose Us Section */
 .why-choose-us {
-    padding: 5rem 0;
-    background: #f8fafc;
+    padding: 6rem 0;
+    background: #2a2a2a !important;
+}
+
+.why-choose-us .section-title {
+    color: white;
+    background: none;
+    -webkit-text-fill-color: white;
+}
+
+.why-choose-us .section-subtitle {
+    color: rgba(245, 245, 240, 0.85);
 }
 
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
     margin-top: 3rem;
 }
 
 .feature-item {
     text-align: center;
-    padding: 2rem;
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
-    border: 1px solid #f1f5f9;
+    padding: 2.5rem 2rem;
+    background: #f5f5f0;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    position: relative;
 }
 
 .feature-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.18);
+    border-color: rgba(188, 25, 21, 0.2);
 }
 
 .feature-icon {
-    width: 80px;
-    height: 80px;
+    width: 85px;
+    height: 85px;
     background: linear-gradient(135deg, #bc1915, #0298dd);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 1.5rem;
+    margin: 0 auto 1.75rem;
     color: white;
-    font-size: 2rem;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    font-size: 2.2rem;
+    box-shadow: 0 10px 30px rgba(188, 25, 21, 0.35);
 }
 
 .feature-item h3 {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     margin-bottom: 1rem;
     color: #1a1a1a;
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: -0.01em;
 }
 
 .feature-item p {
-    color: #4a5568;
-    line-height: 1.6;
+    color: #2d3748;
+    line-height: 1.7;
     margin: 0;
+    font-size: 1rem;
+}
+
+/* Ensure feature items maintain light background even on dark sections */
+section:nth-child(even) .feature-item {
+    background: #f5f5f0;
+}
+
+section:nth-child(even) .feature-item h3,
+section:nth-child(even) .feature-item p {
+    color: #1a1a1a;
 }
 
 /* Responsive Design */
@@ -952,13 +1064,15 @@ body {
     background-position: center;
     color: white;
     text-align: center;
-    padding-top: 100px;
+    padding-top: 140px;
+    min-height: 500px;
 }
 
 .private-events-content {
     max-width: 800px;
     z-index: 1;
     position: relative;
+    margin-top: 2rem;
 }
 
 .private-events-title {
@@ -1121,23 +1235,25 @@ body {
 
 .step-card {
     text-align: center;
-    padding: 2rem;
-    background: #f8fafc;
-    border-radius: 15px;
-    transition: all 0.3s ease;
-    border: 1px solid #e2e8f0;
+    padding: 2.5rem 2rem;
+    background: #f5f5f0;
+    border-radius: 20px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 }
 
 .step-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    background: white;
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    background: #ffffff;
+    border-color: rgba(188, 25, 21, 0.2);
 }
 
 .step-number {
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     background: linear-gradient(135deg, #bc1915, #0298dd);
     border-radius: 50%;
     display: flex;
@@ -1145,21 +1261,24 @@ body {
     justify-content: center;
     margin: 0 auto 1.5rem;
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     font-weight: 700;
+    box-shadow: 0 8px 20px rgba(188, 25, 21, 0.3);
 }
 
 .step-card h3 {
-    font-size: 1.3rem;
-    font-weight: 600;
+    font-size: 1.4rem;
+    font-weight: 700;
     color: #1a1a1a;
     margin-bottom: 1rem;
+    letter-spacing: -0.01em;
 }
 
 .step-card p {
-    color: #4a5568;
-    line-height: 1.6;
+    color: #2d3748;
+    line-height: 1.7;
     margin: 0;
+    font-size: 1rem;
 }
 
 .package-icon {
@@ -1318,6 +1437,11 @@ body {
         rgba(0, 0, 0, 0.4) 100%
     );
     z-index: -1;
+}
+
+.hero .hero-overlay {
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
 }
 
 .hero-content {
@@ -1911,13 +2035,30 @@ body {
 /* ===== CONTACT SECTION ===== */
 .contact {
     padding: 100px 0;
-    background: white;
+    background: #2a2a2a !important;
 }
 
 .contact-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
+    align-items: start;
+}
+
+.contact-info {
+    padding: 2rem 0;
+}
+
+.contact-info .section-title {
+    color: white;
+    background: none;
+    -webkit-text-fill-color: white;
+    margin-bottom: 1.5rem;
+}
+
+.contact-info .section-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2.5rem;
 }
 
 .contact-methods {
@@ -1927,40 +2068,50 @@ body {
 .contact-method {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 1.5rem 0;
-    border-bottom: 1px solid #e2e8f0;
+    gap: 1.25rem;
+    padding: 1.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
 }
 
 .contact-method:last-child {
     border-bottom: none;
 }
 
+.contact-method:hover {
+    padding-left: 0.5rem;
+}
+
 .contact-method i {
-    width: 50px;
-    height: 50px;
+    width: 56px;
+    height: 56px;
     background: linear-gradient(135deg, #bc1915, #0298dd);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    box-shadow: 0 4px 15px rgba(188, 25, 21, 0.3);
 }
 
 .method-label {
     display: block;
-    font-size: 0.9rem;
-    color: #64748b;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
 }
 
 .method-value {
     display: block;
-    font-weight: 600;
-    color: #1a1a1a;
+    font-weight: 500;
+    color: white;
     font-size: 1.1rem;
+    letter-spacing: 0.01em;
 }
 
 .social-links {
@@ -1989,38 +2140,50 @@ body {
 
 /* ===== CONTACT FORM ===== */
 .contact-form {
-    background: #fafafa;
-    padding: 3rem;
-    border-radius: 20px;
+    background: #ffffff;
+    padding: 3.5rem;
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
 }
 
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    gap: 1.25rem;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
     font-weight: 600;
     color: #1a1a1a;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
     width: 100%;
-    padding: 12px 16px;
+    padding: 14px 18px;
     border: 2px solid #e2e8f0;
-    border-radius: 8px;
+    border-radius: 12px;
     font-size: 1rem;
-    transition: border-color 0.3s ease;
-    background: white;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #ffffff;
+    color: #1a1a1a;
+    font-family: 'Inter', sans-serif;
+}
+
+.form-group input:hover,
+.form-group select:hover,
+.form-group textarea:hover {
+    border-color: #cbd5e0;
 }
 
 .form-group input:focus,
@@ -2028,12 +2191,14 @@ body {
 .form-group textarea:focus {
     outline: none;
     border-color: #0298dd;
-    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+    box-shadow: 0 0 0 4px rgba(2, 152, 221, 0.12);
+    transform: translateY(-1px);
 }
 
 .form-group textarea {
     resize: vertical;
-    min-height: 100px;
+    min-height: 120px;
+    line-height: 1.6;
 }
 
 /* ===== PAGE HERO SECTION ===== */
@@ -2961,25 +3126,35 @@ body {
     min-height: 600px;
 }
 
+.come-stay-hero .hero-overlay {
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
 .come-stay-content {
     z-index: 2;
     max-width: 900px;
+    position: relative;
+    color: #ffffff !important;
 }
 
 .stay-title {
-    font-size: 5rem;
+    font-size: 4.5rem;
     font-weight: 700;
-    margin-bottom: 1rem;
-    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    font-family: 'Playfair Display', serif;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    color: #ffffff !important;
 }
 
 .stay-tagline {
     font-size: 2rem;
     font-style: italic;
-    opacity: 0.95;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    opacity: 1 !important;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 1), 0 1px 6px rgba(0, 0, 0, 0.9), 0 0 3px rgba(0, 0, 0, 0.8);
     margin-bottom: 2rem;
+    color: #ffffff !important;
 }
 
 .coming-soon-title {
@@ -2988,7 +3163,8 @@ body {
     font-style: italic;
     letter-spacing: 0.1em;
     margin-top: 4rem;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 1), 0 1px 6px rgba(0, 0, 0, 0.9), 0 0 3px rgba(0, 0, 0, 0.8);
+    color: #ffffff !important;
     line-height: 1;
     font-family: 'Playfair Display', serif;
     opacity: 0.85;
@@ -3136,7 +3312,7 @@ body {
 
 @media (max-width: 768px) {
     .stay-logo-nav {
-        height: 140px;
+        height: 100px;
     }
 
     .stay-title {
