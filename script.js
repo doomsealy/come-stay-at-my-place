@@ -520,12 +520,8 @@ document.addEventListener('DOMContentLoaded', () => {
     new ParallaxEffect();
     new LoadingAnimations();
 
-    // Initialize backend integration
-    import('./backend-integration.js').then(() => {
-        console.log('Backend integration loaded');
-    }).catch(error => {
-        console.warn('Backend integration not available:', error);
-    });
+    // Backend integration now handled by Firebase CDN in HTML
+    console.log('Firebase integration ready');
 
     // Note: Reviews are loaded by static-reviews.js (loaded in HTML)
     // If you want to use dynamic Google reviews instead, uncomment the code below

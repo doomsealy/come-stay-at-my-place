@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Firebase CDN -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics-compat.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -33,7 +38,13 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a href="index.html#contact" class="nav-link">Contact</a>
+                    <a href="https://wa.me/17587180465?text=Hi%20Marlon!%20I'm%20interested%20in%20equipment%20rentals." target="_blank" class="nav-link">Contact</a>
+                </li>
+                <li class="nav-item disturbia-nav-item">
+                    <a href="disturbia-mas.html" class="nav-link disturbia-link">
+                        <span class="disturbia-badge">NEW</span>
+                        Disturbia Mas 🔥
+                    </a>
                 </li>
             </ul>
             <div class="hamburger">
@@ -301,7 +312,7 @@
                     <div class="footer-column">
                         <h4>Connect</h4>
                         <ul>
-                            <li><a href="index.html#contact">Contact Us</a></li>
+                            <li><a href="https://wa.me/17587180465?text=Hi%20Marlon!%20I'm%20interested%20in%20equipment%20rentals." target="_blank">Contact Us</a></li>
                             <li><a href="index.html">Gallery</a></li>
                         </ul>
                     </div>
@@ -314,8 +325,79 @@
         </div>
     </footer>
 
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/17587180465?text=Hi%20Marlon!%20I'm%20interested%20in%20equipment%20rentals." 
+       class="whatsapp-float" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
     <script src="script.js"></script>
     <script src="equipment-rentals.js"></script>
+    <script src="firebase-config.js"></script>
+    <script>
+        // Initialize Firebase
+        initializeFirebase();
+        
+        // Handle Equipment Rental Form
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('equipment-rental-form');
+            
+            if (form) {
+                form.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    const submitBtn = form.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.innerHTML;
+                    
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                    submitBtn.disabled = true;
+                    
+                    try {
+                        const formData = new FormData(form);
+                        
+                        // Collect selected equipment
+                        const equipmentCheckboxes = form.querySelectorAll('input[name="equipment[]"]:checked');
+                        const selectedEquipment = Array.from(equipmentCheckboxes).map(cb => cb.value);
+                        
+                        const data = {
+                            name: formData.get('name'),
+                            email: formData.get('email'),
+                            phone: formData.get('phone'),
+                            rentalDate: formData.get('rental-date'),
+                            eventType: formData.get('event-type') || 'Equipment Rental',
+                            equipment: selectedEquipment.join(', '),
+                            message: formData.get('message'),
+                            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                            source: 'equipment-rentals-page',
+                            status: 'new',
+                            pageUrl: window.location.href
+                        };
+                        
+                        await firebase.firestore().collection('contact_inquiries').add(data);
+                        
+                        const successDiv = document.createElement('div');
+                        successDiv.style.cssText = 'background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 1rem 2rem; border-radius: 12px; margin: 1rem 0; text-align: center; font-weight: 600;';
+                        successDiv.innerHTML = '<i class="fas fa-check-circle"></i> Equipment Rental Request Received! We\'ll get back to you with availability and pricing within 24 hours.';
+                        form.parentNode.insertBefore(successDiv, form.nextSibling);
+                        
+                        form.reset();
+                        
+                        setTimeout(() => successDiv.remove(), 8000);
+                        
+                    } catch (error) {
+                        console.error('Error:', error);
+                        alert('Sorry, there was an error. Please try again or contact us directly.');
+                    } finally {
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
 

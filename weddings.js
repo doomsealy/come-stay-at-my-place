@@ -6,15 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
     new MobileNavigation();
     new SmoothScrolling();
     new NavbarScrollEffect();
-    new ContactForm();
+    // new ContactForm(); // Disabled - Form now handled by Firebase
     new ScrollAnimations();
 
-    // Initialize backend integration
-    import('./backend-integration.js').then(() => {
-        console.log('Backend integration loaded');
-    }).catch(error => {
-        console.warn('Backend integration not available:', error);
-    });
+    // Backend integration now handled by Firebase CDN in HTML
+    console.log('Firebase integration ready');
 
     // Add page loaded class
     setTimeout(() => {
@@ -243,7 +239,7 @@ class WeddingPricingCalculator {
 // ===== INITIALIZE WEDDING PAGE COMPONENTS =====
 document.addEventListener('DOMContentLoaded', () => {
     new PackageSelection();
-    new WeddingContactForm();
+    // new WeddingContactForm(); // Disabled - Form now handled by Firebase
     new PackageComparison();
     new WeddingPricingCalculator();
 });
