@@ -443,14 +443,18 @@ body {
 
 /* ===== SAINT LUCIA HERO ===== */
 .saint-lucia-hero {
-    height: 70vh;
+    height: 100vh;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    min-height: 500px;
-    padding-top: 100px; /* Add space to account for fixed navbar */
+    min-height: 600px;
+}
+
+.saint-lucia-hero .hero-overlay {
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 1;
 }
 
 .saint-lucia-video {
@@ -484,7 +488,7 @@ body {
     text-align: center;
     color: white;
     max-width: 800px;
-    z-index: 1;
+    z-index: 2;
     position: relative;
 }
 
@@ -654,17 +658,16 @@ body {
 
 /* ===== WEDDING PAGE STYLES ===== */
 .wedding-hero {
-    height: 60vh;
+    height: 100vh;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    background: url('https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
     background-size: cover;
     background-position: center;
     color: white;
     text-align: left;
-    padding-top: 100px;
+    min-height: 600px;
 }
 
 .wedding-hero .hero-overlay {
@@ -2955,6 +2958,7 @@ body {
     color: white;
     text-align: center;
     overflow: hidden;
+    min-height: 600px;
 }
 
 .come-stay-content {
