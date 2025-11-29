@@ -227,6 +227,13 @@ h1, h2, h3, h4, h5, h6 {
     min-height: 80px;
 }
 
+/* Smaller navbar on Come Stay page while keeping logo size */
+body:has(.come-stay-hero) .navbar .nav-container,
+.come-stay-page .navbar .nav-container {
+    padding: 0.1rem 2rem;
+    min-height: 45px;
+}
+
 /* Smaller navbar on Saint Lucia page */
 .saint-lucia-page .navbar .nav-container {
     padding: 0.5rem 2rem;
@@ -246,11 +253,11 @@ body:has(.saint-lucia-hero) .navbar .nav-container {
 }
 
 .stay-logo-nav {
-    height: 150px;
+    height: 180px;
     width: auto;
-    max-width: 300px;
+    max-width: 360px;
     object-fit: contain;
-    transform: scale(1.25);
+    transform: scale(1.2);
     transform-origin: left center;
 }
 
