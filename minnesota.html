@@ -38,7 +38,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a href="https://wa.me/17587180465?text=Hi%20Marlon!%20I'm%20interested%20in%20your%20services." target="_blank" class="nav-link">Contact</a>
+                    <a href="https://wa.me/17587180465?text=Hey%20Slim%2C%20I'm%20interested%20in%20your%20services%20but%20I%20have%20just%20a%20few%20questions." target="_blank" class="nav-link">Contact</a>
                 </li>
                 <li class="nav-item disturbia-nav-item">
                     <a href="disturbia-mas.html" class="nav-link disturbia-link">
@@ -77,7 +77,7 @@
                 <p class="section-subtitle">Professional entertainment packages tailored to your Minnesota wedding</p>
             </div>
             
-            <div class="packages-grid">
+            <div class="packages-grid packages-grid-3">
                 <!-- Industry Standard Package -->
                 <div class="package-card">
                     <div class="package-content">
@@ -89,7 +89,7 @@
                             <li><i class="fas fa-check"></i> Up to 6 hours of MC/DJ services</li>
                             <li><i class="fas fa-check"></i> Superior sound system for up to 200 guests</li>
                             <li><i class="fas fa-check"></i> 8 wireless uplights</li>
-                            <li><i class="fas fa-check"></i> Posted emcee with larger than life personality</li>
+                            <li><i class="fas fa-check"></i> Poised MC with larger than life personality</li>
                             <li><i class="fas fa-check"></i> Very best customer service</li>
                             <li><i class="fas fa-check"></i> Fast communication from start to finish</li>
                         </ul>
@@ -174,6 +174,20 @@
                     <h3>Personalized Service</h3>
                     <p>We work closely with you to understand your vision and bring it to life on your special day.</p>
                 </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Flexible Scheduling</h3>
+                    <p>We accommodate your timeline and work around your schedule to ensure everything runs smoothly on your wedding day.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Reliable & Professional</h3>
+                    <p>Count on us for punctual setup, professional service, and seamless execution from start to finish.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -214,13 +228,12 @@
                             <input type="tel" id="phone" name="phone" placeholder="Your Phone">
                         </div>
                         <div class="form-group">
-                            <select id="event-type" name="event-type">
-                                <option value="">Event Type</option>
-                                <option value="wedding">Wedding</option>
-                                <option value="corporate">Corporate Event</option>
-                                <option value="private-party">Private Party</option>
-                                <option value="sound-rental">Sound System Rental</option>
-                                <option value="other">Other</option>
+                            <select id="package-selection" name="package-selection">
+                                <option value="">Select Package</option>
+                                <option value="industry-standard">Industry Standard - $2,899</option>
+                                <option value="ceremony-support">Ceremony Support - $3,499</option>
+                                <option value="ultimate-wedding-party">The Ultimate Wedding Party - $4,999</option>
+                                <option value="custom">Custom Package</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -263,7 +276,7 @@
                     <div class="footer-column">
                         <h4>Connect</h4>
                         <ul>
-                            <li><a href="https://wa.me/17587180465?text=Hi%20Marlon!%20I'm%20interested%20in%20your%20services." target="_blank">Contact Us</a></li>
+                            <li><a href="https://wa.me/17587180465?text=Hey%20Slim%2C%20I'm%20interested%20in%20your%20services%20but%20I%20have%20just%20a%20few%20questions." target="_blank">Contact Us</a></li>
                             <li><a href="https://instagram.com/djbiggslimevents" target="_blank">Gallery</a></li>
                         </ul>
                     </div>
@@ -277,7 +290,7 @@
     </footer>
 
     <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/17587180465?text=Hi%20Marlon!%20I'm%20interested%20in%20booking%20your%20services." 
+    <a href="https://wa.me/17587180465?text=Hey%20Slim%2C%20I'm%20interested%20in%20your%20services%20but%20I%20have%20just%20a%20few%20questions." 
        class="whatsapp-float" 
        target="_blank" 
        rel="noopener noreferrer"
@@ -322,7 +335,9 @@
                         const data = {
                             name: formData.get('name'),
                             email: formData.get('email'),
-                            eventType: formData.get('event-type'),
+                            phone: formData.get('phone'),
+                            packageSelection: formData.get('package-selection'),
+                            eventType: 'Wedding',
                             eventDate: formData.get('event-date'),
                             message: formData.get('message'),
                             timestamp: firebase.firestore.FieldValue.serverTimestamp(),

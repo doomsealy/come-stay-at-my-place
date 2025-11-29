@@ -29,9 +29,28 @@ section {
     padding: 4rem 0;
 }
 
+/* Exclude hero sections from general section styling */
+section.hero,
+section.saint-lucia-hero,
+section.wedding-hero,
+section.private-events-hero,
+section.come-stay-hero {
+    background-color: transparent !important;
+    padding: 0;
+}
+
 section:nth-child(even) {
     background-color: #2a2a2a;
     color: #f5f5f0;
+}
+
+/* Exclude hero sections from alternating background */
+section:nth-child(even).hero,
+section:nth-child(even).saint-lucia-hero,
+section:nth-child(even).wedding-hero,
+section:nth-child(even).private-events-hero,
+section:nth-child(even).come-stay-hero {
+    background-color: transparent !important;
 }
 
 section:nth-child(even) h1,
@@ -203,7 +222,7 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.75rem 2rem;
+    padding: 0.5rem 2rem;
     overflow: visible;
     min-height: 80px;
 }
@@ -734,11 +753,14 @@ body {
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(188, 25, 21, 0.8), rgba(2, 152, 221, 0.8)), 
+                url('https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
     background-size: cover;
     background-position: center;
     color: white;
-    text-align: left;
+    text-align: center;
+    padding-top: 140px;
     min-height: 600px;
 }
 
@@ -756,50 +778,34 @@ body {
 }
 
 .wedding-hero .wedding-content {
-    max-width: 1000px;
-    z-index: 2;
+    max-width: 800px;
+    z-index: 1;
     position: relative;
-    text-align: center;
-    margin: 0 auto;
-    display: block;
-    background: transparent;
-    padding: 2rem;
-    width: 90%;
+    margin-top: 8rem;
+    padding-top: 2rem;
 }
 
 .wedding-title {
-    font-size: 5rem;
+    font-size: 3.5rem;
     font-weight: 700;
-    margin-bottom: 1rem;
-    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    text-align: center;
-    width: 100%;
-    color: white;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .wedding-subtitle {
     font-size: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     opacity: 0.95;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    line-height: 1.4;
-    color: white;
-    font-weight: 400;
-    letter-spacing: 0.01em;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .wedding-description {
-    font-size: 1.3rem;
-    opacity: 0.92;
-    line-height: 1.7;
-    max-width: 900px;
+    font-size: 1.1rem;
+    opacity: 0.9;
+    line-height: 1.6;
+    max-width: 700px;
     margin: 0 auto;
-    text-align: center;
-    width: 100%;
-    color: white;
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* Package Cards */
@@ -810,13 +816,19 @@ body {
 
 .packages-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
     margin-top: 3rem;
-    max-width: 1200px;
+    max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
     padding: 0;
+}
+
+/* Center 3 items - for Minnesota page */
+.packages-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1100px;
 }
 
 .package-card {
@@ -887,8 +899,9 @@ body {
     display: flex;
     align-items: flex-start;
     gap: 0.6rem;
-    line-height: 1.4;
+    line-height: 1.6;
     font-size: 0.9rem;
+    overflow: visible;
 }
 
 .package-features i {
@@ -935,9 +948,12 @@ body {
 
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
     margin-top: 3rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .feature-item {
@@ -1015,8 +1031,15 @@ section:nth-child(even) .feature-item p {
     }
     
     .packages-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         gap: 1.5rem;
+    }
+}
+
+@media (max-width: 1400px) {
+    .packages-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
     }
 }
 
@@ -1041,6 +1064,27 @@ section:nth-child(even) .feature-item p {
         padding: 2rem;
     }
     
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
     .features-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
@@ -1072,7 +1116,8 @@ section:nth-child(even) .feature-item p {
     max-width: 800px;
     z-index: 1;
     position: relative;
-    margin-top: 2rem;
+    margin-top: 8rem;
+    padding-top: 2rem;
 }
 
 .private-events-title {
