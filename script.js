@@ -26,6 +26,11 @@ class HeroVideo {
             // Handle video load failure
             this.video.addEventListener('error', () => {
                 console.log('Hero video failed to load');
+                // Show fallback background image
+                const fallback = document.querySelector('.hero-fallback-bg');
+                if (fallback) {
+                    fallback.style.display = 'block';
+                }
             });
 
             // Ensure video plays on mobile
@@ -510,10 +515,159 @@ class LoadingAnimations {
     }
 }
 
+// ===== COME STAY VIDEO =====
+class ComeStayVideo {
+    constructor() {
+        this.video = document.getElementById('come-stay-video');
+        this.unmuteBtn = document.getElementById('come-stay-unmute-btn');
+        this.heroContent = document.querySelector('.come-stay-content');
+        this.navbar = document.querySelector('.navbar');
+        this.isFullscreenMode = false;
+        this.cursorTimer = null;
+        this.soundEnabled = false;
+        // Only initialize if video exists
+        if (this.video) {
+            this.init();
+        }
+    }
+
+    init() {
+        if (this.video) {
+            // Handle video load success
+            this.video.addEventListener('loadeddata', () => {
+                console.log('Come Stay video loaded successfully');
+            });
+
+            // Handle video load failure
+            this.video.addEventListener('error', () => {
+                console.log('Come Stay video failed to load, using fallback image');
+                // Show fallback background image
+                const fallback = document.querySelector('.come-stay-hero .hero-fallback-bg');
+                if (fallback) {
+                    fallback.style.display = 'block';
+                }
+            });
+
+            // Ensure video plays on mobile (muted by default)
+            this.video.addEventListener('canplay', () => {
+                this.video.play().catch(e => {
+                    console.log('Autoplay prevented on this device');
+                });
+            });
+
+            // Handle unmute button
+            if (this.unmuteBtn) {
+                this.unmuteBtn.addEventListener('click', () => {
+                    this.toggleMute();
+                });
+            }
+
+            // Handle mouse movement for fullscreen mode
+            document.addEventListener('mousemove', () => {
+                this.handleMouseMove();
+            });
+
+            // Handle clicks to exit fullscreen mode
+            document.addEventListener('click', (e) => {
+                if (this.isFullscreenMode && !e.target.closest('.unmute-button')) {
+                    this.exitFullscreenMode();
+                }
+            });
+
+            // Handle escape key to exit fullscreen mode
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && this.isFullscreenMode) {
+                    this.exitFullscreenMode();
+                }
+            });
+        }
+    }
+
+    toggleMute() {
+        if (this.video.muted) {
+            // Unmute video
+            this.video.muted = false;
+            this.unmuteBtn.innerHTML = '<i class="fas fa-volume-up"></i> Sound On!';
+            this.unmuteBtn.classList.add('unmuted');
+            this.unmuteBtn.title = 'Mute video';
+            this.soundEnabled = true;
+            
+            // Start the fullscreen mode timer
+            this.startFullscreenTimer();
+        } else {
+            // Mute video
+            this.video.muted = true;
+            this.unmuteBtn.innerHTML = '<i class="fas fa-volume-mute"></i> Sound On!';
+            this.unmuteBtn.classList.remove('unmuted');
+            this.unmuteBtn.title = 'Unmute video';
+            this.soundEnabled = false;
+            
+            // Exit fullscreen mode if active
+            this.exitFullscreenMode();
+        }
+    }
+
+    handleMouseMove() {
+        if (this.soundEnabled) {
+            // Show UI elements when mouse moves
+            this.showUI();
+            
+            // Reset the timer
+            this.startFullscreenTimer();
+        }
+    }
+
+    startFullscreenTimer() {
+        // Clear existing timer
+        if (this.cursorTimer) {
+            clearTimeout(this.cursorTimer);
+        }
+
+        // Set new timer for 2 seconds
+        this.cursorTimer = setTimeout(() => {
+            if (this.soundEnabled && !this.isFullscreenMode) {
+                this.enterFullscreenMode();
+            }
+        }, 2000);
+    }
+
+    enterFullscreenMode() {
+        this.isFullscreenMode = true;
+        document.body.classList.add('fullscreen-video-mode');
+        
+        // Hide UI elements
+        if (this.heroContent) this.heroContent.style.opacity = '0';
+        if (this.navbar) this.navbar.style.opacity = '0';
+        
+        // Hide cursor after a moment
+        setTimeout(() => {
+            if (this.isFullscreenMode) {
+                document.body.style.cursor = 'none';
+            }
+        }, 1000);
+    }
+
+    exitFullscreenMode() {
+        this.isFullscreenMode = false;
+        document.body.classList.remove('fullscreen-video-mode');
+        document.body.style.cursor = 'default';
+        
+        // Show UI elements
+        this.showUI();
+    }
+
+    showUI() {
+        if (this.heroContent) this.heroContent.style.opacity = '1';
+        if (this.navbar) this.navbar.style.opacity = '1';
+        document.body.style.cursor = 'default';
+    }
+}
+
 // ===== INITIALIZE ALL COMPONENTS =====
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize all components
     new HeroVideo(); // This will handle both video and slideshow
+    new ComeStayVideo(); // Handle Come Stay video
     // DON'T initialize ReviewsCarousel here - let static-reviews.js do it after loading reviews
     new MobileNavigation();
     new NavbarScrollEffect();
