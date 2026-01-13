@@ -435,8 +435,14 @@
                         const encodedMessage = encodeURIComponent(whatsappMessage);
                         const whatsappUrl = `https://wa.me/17587180465?text=${encodedMessage}`;
                         
-                        // Open WhatsApp in new tab
-                        window.open(whatsappUrl, '_blank');
+                        // Open WhatsApp (works on mobile)
+                        if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                            // Mobile: use location.href (doesn't get blocked)
+                            window.location.href = whatsappUrl;
+                        } else {
+                            // Desktop: open in new tab
+                            window.open(whatsappUrl, '_blank');
+                        }
                         
                         // Show success message
                         const successDiv = document.createElement('div');
